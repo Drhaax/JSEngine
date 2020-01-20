@@ -1,4 +1,3 @@
-
 function Entity()  {
 	this.Id = (+ new Date()).toString(16) +
 		(Math.random() * 1000000 | 0).toString(16) +
