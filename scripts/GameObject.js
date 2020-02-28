@@ -1,33 +1,53 @@
 function Transform(x,y,w,h) {
-	this.x = x;
-	this.y = y;
-	this.Width = w;
-	this.Height = h;
-}
-Instances = [];
-class GameObject {
+	ComponentBase.call(this);
+	this.position = new Vector2(x,y);
+	this.width = w;
+	this.height = h;
+	this.GetCenterPoint = function() {
+		var centerX = this.position.x+this.width/2;
+		var centerY = this.position.y+this.height/2;
+		return new Vector2(centerX,centerY)
+	}
 	
-	constructor(w, h, x = 0, y = 0){
-		this.Transform = new Transform(x,y,w,h);
-		//this.Ctx = ctx;
-		this.Active = true;
-		Instances.push(this);
+	this.SetX = function(x){
+		this.position.SetX(x);
 	}
 
-	Update() {
-		if(this.Active){
-			ESystem.Ctx.fillRect(this.Transform.x, this.Transform.y, this.Transform.Width, this.Transform.Height);
+	this.SetY = function(y){
+		this.position.SetY(y);
+	}
+
+	this.SetPosition = function(pos){
+		this.position.Set(pos);
+	}
+	this.Move = function(pos) {
+		var fixedVector = pos.Times(DeltaTime);
+		this.position.Move(fixedVector.Times(10));
+	}
+}
+
+function Property(initialValue,propertyChanged) {
+	var current = initialValue;
+	return {
+        get value() {
+			return current;
+		},
+        set value(newValue) {
+			if(current != newValue){
+				propertyChanged(current, newValue);
+				current = newValue;
+			}
 		}
-	}
+    };
+}
 
-	Draw() {
-		if(this.Active){
-			ESystem.Ctx.fillRect(this.Transform.x, this.Transform.y, this.Transform.Width, this.Transform.Height);
-		}
-	}
+function GameObject (w, h, x = 0, y = 0) {
+	Entity.call(this);
+	this.AddComponent(new Transform(x,y,w,h));
 
-	Destroy() {
-		this.Active = false;
+	this.active.value = true;
+	this.Destroy = function() {
+		this.active.value = false;
 		var i = 0;
 		while(Instances[i] !== this){
 			i++;
