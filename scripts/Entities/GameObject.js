@@ -42,7 +42,7 @@ function Property(initialValue,propertyChanged) {
 }
 
 function GameObject (w, h, x = 0, y = 0) {
-	Entity.call(this);
+	WorldEntity.call(this);
 	this.AddComponent(new Transform(x,y,w,h));
 
 	this.active.value = true;

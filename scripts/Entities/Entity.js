@@ -1,4 +1,4 @@
-function Entity()  {
+	function Entity()  {
 	this.Id = (+ new Date()).toString(16) +
 		(Math.random() * 1000000 | 0).toString(16) +
 		Entity.prototype.count;
@@ -13,8 +13,6 @@ function Entity()  {
 		});
 	}
 	this.active = new Property(false, propChanged);
-	
-	Engine.Entities.AddEntry(this.Id,this);
 		
 	Entity.prototype.count++;
 	

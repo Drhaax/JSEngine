@@ -10,4 +10,18 @@ function Entities() {
 		});
 	}
 
+	this.ForEachWithFunction = function(f, cb){
+		this.ForEach(ent => {
+			var maybeComp = ent.EntityComponents.GetValueWithKey(f);
+			ent.EntityComponents.ForEach(comp => {
+				if(comp === 'Initialize'){
+					console.log('asdasdasd');
+				}
+			});
+			//console.log(maybeComp);
+			if(maybeComp){
+				cb(maybeComp);
+			}
+		});
+	};
 }

@@ -4,6 +4,7 @@ function Movement() {
 	this.Start = function() {
 		this.AttachListeners();
 		transform = this.parent.GetComponent(Transform);
+		console.log(this.parent);
 	}
 
 	this.Update = function(){
@@ -12,6 +13,7 @@ function Movement() {
 		}
 		if(this.Down == true){
 			this.Move(0,1);
+			this.parent.Tesburu.GetComponent(Text).SetText('asdadsasdgggg');
 		}
 		if(this.Left == true){
 			this.Move(-1,0);

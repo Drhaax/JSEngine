@@ -6,14 +6,6 @@ const Direction  = {
 }
 
 function ColliderBase() {
-
-	this.CollisionDirections = {
-		LEFT : false,
-		RIGHT : false,
-		UP : false,
-		DOWN : false
-	};
-
 	ComponentBase.call(this);
 	this.EnteredCollision = false;
 	this.CheckCollision = function(collider){
@@ -25,9 +17,11 @@ function ColliderBase() {
 	}
 
 	this.StayCollision = function(collider){
+		//console.warn('stasy');
 	}
 
 	this.ExitCollision = function(collider){
+		//console.warn('exit');
 	}
 }
 
@@ -71,7 +65,6 @@ function BoxCollider(name) {
 	this.TriggerExitCollision = function(collider){
 		if(UnregisterCollision(collider)){
 			this.EnteredCollision = false;
-			
 			this.ExitCollision();
 		}
 	}

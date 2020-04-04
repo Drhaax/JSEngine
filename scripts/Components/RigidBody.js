@@ -43,12 +43,11 @@ function RigidBody() {
 			return;
 		}
 		if(collider.IsCollisionsInDirection(Direction.DOWN)){
-			console.log('colliding');
 			timeFalling = 0;
 		}
 		
 		timeFalling += DeltaTime;
-		velocity = acceleration.Times(timeFalling);
-		transform.Move(velocity);
+		this.velocity.y = acceleration.y * timeFalling;
+		transform.Move(this.velocity);
 	}
 }
